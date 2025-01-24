@@ -1,0 +1,166 @@
+* {
+    margin: 0;
+    padding: 0;
+    background-color: whitesmoke;
+    box-sizing: border-box;
+}
+
+.fa-solid {
+    background-color: green;
+}
+
+header {
+    padding: 20px;
+    display: flex;
+    box-shadow: 5px 5px 5px rgba(140, 140, 140, 0.6);
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+h1 {
+    font-family: monospace;
+    font-size: 3rem;
+    text-align: center;
+    text-transform:uppercase;
+    text-shadow: 2px 2px 2px rgba(140, 140, 140, 0.637);
+}
+
+h2 {
+    font-family: 'Courier New', Courier, monospace;
+    color: grey;
+}
+
+/* main calculator section */
+.calculator {
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
+    border-radius: 5px;
+    width: 50%;
+    margin: 0 auto;
+    box-shadow: 20px 10px 20px rgba(140, 140, 140, 0.6);
+}
+
+/* result READ-ONLY input at top of calculator */
+input {
+    padding: 20px;
+    margin: 5px;
+    margin-bottom: 20px;
+    width: auto;
+    height: 30px;
+    border: none;
+    border-radius: 5px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 24px;
+    background-color: rgba(192, 192, 192, 0.344);
+    box-shadow: 2px 2px 5px rgba(140, 140, 140, 0.6);
+}
+
+
+/* disappearing instruction under input */
+#instruction {
+    width: 100%;
+    border-radius: 5px;
+    margin: 10px;
+    text-align: center;
+    font-size: 1rem;
+    color: grey;
+    font-family: monospace;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 10px;
+}
+
+/* the number pad div/section */
+.numberPad {
+    padding: 20px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(4, auto);
+    gap: 10px;
+    align-items: center;
+    justify-items: center;
+    border-radius: 5px;
+    box-shadow: 10px 5px 20px rgba(140, 140, 140, 0.6);
+}
+
+
+/* number styling */
+.numberPad button {
+    width: 100%;
+    height: 50px;
+    font-size: 36px;
+    text-align: center;
+    font-weight: bold;
+    background-color: green;
+    color: white;
+    border-radius: 5px;
+    box-shadow: 10px 5px 20px rgba(140, 140, 140, 0.6);
+    transition: transform 0.5s ease;
+}
+.numberPad button:hover {
+    background-color: black;
+    cursor: pointer;
+}
+.numberPad button:active {
+    transform: scale(1.1);
+}
+
+
+/* zero button style and position */ 
+button#zero {
+    grid-column: 1 / span 3; /* span all 3 columns */
+    grid-row: 4; /* third row */
+}
+
+/* C button style and position */
+#clearButton {
+    grid-column: 1;
+    grid-row: 5;
+    background-color: red;
+}
+#clearButton:hover {
+    background-color: black;
+}
+
+/* = button style and position */
+#equalButton {
+    grid-column: 2;
+    grid-row: 5;
+    background-color: gold;
+    color: black;
+}
+#equalButton:hover {
+    background-color: black;
+    color: white;
+}
+
+/* operator styles (+ - * /) */
+.operator {
+    background-color: blue !important;
+}
+.operator:hover {
+    background-color: black !important;
+}
+
+
+/* small screen media queries */
+
+@media (max-width: 768px) {
+
+    h1 {
+        font-size: 2rem;
+    }
+    
+    .calculator {
+        width: 100%;
+        border: none;
+    }
+
+
+}

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project: Calculator</title>
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+    <header>
+        <h1>Basic Calculator</h1>
+    </header>
+
+    <div class="calculator">
+        <!--Read-Only input-->
+        <input type="text" class="display" id="display" readonly>
+
+        <p id="instruction">Make sure to click 'C' when starting a new calculation</p>
+
+        <div class="numberPad">
+            <!--The numeric and operator pads-->
+            <button onclick="appendNumber(7)">7</button>
+            <button onclick="appendNumber(8)">8</button>
+            <button onclick="appendNumber(9)">9</button>
+            <button onclick="appendNumber(4)">4</button>
+            <button onclick="appendNumber(5)">5</button>
+            <button onclick="appendNumber(6)">6</button>
+            <button onclick="appendNumber(1)">1</button>
+            <button onclick="appendNumber(2)">2</button>
+            <button onclick="appendNumber(3)">3</button>
+            <button id="zero" onclick="appendNumber(0)">0</button>
+
+            <button id="clearButton" onclick="clearDisplay()">C</button>
+            <button id="equalButton" onclick="calculateResult()">=</button>
+
+            <button class="operator" onclick="chooseOperator('+')">+</button>
+            <button class="operator" onclick="chooseOperator('-')">-</button>
+            <button class="operator" onclick="chooseOperator('/')">/</button>
+            <button class="operator" onclick="chooseOperator('*')">*</button>
+        </div>
+    </div>
+
+    <script>
+
+        // Initialize variables
+        let currentInput = ''; // stores current number or result of last operation
+        let previousInput = ''; // stores first number entered before selecting operator (+, -, /, *)
+        let operator = null; // stores operator selected, set to null initially as no operator will be selected
+
+        function appendNumber(number) {
+            currentInput += number; // appends pressed number to currentInput
+            updateDisplay(); // update the display with the currentInput value
+            // hide instruction after user clicks
+            document.getElementById('instruction').style.display = 'none';
+        }
+
+        // handles user operator clicks (+, -, /, *)
+        function chooseOperator(selectedOperator) {
+            if (currentInput === '') return; // ignore user clicks if no number is entered
+            if (previousInput !== '') calculateResult(); // performs current entered calculation before proceeding to next
+
+            operator = selectedOperator; // save the clicked operator
+            previousInput = currentInput; // save first clicked number as previous number so a second number can be pressed
+            currentInput = ''; // clear input for next number
+
+            // display previous number and the operator
+            document.getElementById('display').value = `${previousInput} ${operator}`;
+        }
+
+        function calculateResult() {
+            if (operator === null || currentInput === '') return; // do nothing if no operator or second number added
+
+            const num1 = parseFloat(previousInput); // convert the first input to number
+            const num2 = parseFloat(currentInput); // convert second input to number
+            let result;
+
+            switch (operator) {
+                case '+':
+                    result = num1 + num2;
+                    break;
+                case '-':
+                    result = num1 - num2;
+                    break;
+                case '*':
+                    result = num1 * num2;
+                    break;
+                case '/':
+                    result = num2 !== 0 ? num1 / num2 : 'Error: Divide by 0'; // error if dividing by 0, using ternary operator (if else)
+                    break;
+                default:
+                    result = "Error"; // default error message
+            }
+
+            currentInput = result.toString(); // convert result back to string for display
+            operator = null; // clear the operator after calculation
+            previousInput = ''; // clear previous input
+            updateDisplay(); // update the display with the result of calculation
+        }
+
+        function clearDisplay() {
+            currentInput = '';
+            previousInput = '';
+            operator = null;
+            updateDisplay();
+        }
+
+        function updateDisplay() {
+            document.getElementById('display').value = currentInput; //update display with current input
+            if (previousInput && operator && currentInput) {
+                // if a calculation is present (num + num + operator
+                display.value = `${previousInput} ${operator} ${currentInput}`;
+            } else if (previousInput && operator) {
+                // display if just the first num and operator
+            } else {
+                // otherwise, just show current input
+                display.value = currentInput;
+            }
+        }
+
+    </script>
+    <script src="https://kit.fontawesome.com/d211310cc8.js" crossorigin="anonymous"></script>
+</body>
+
+</html>
